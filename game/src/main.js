@@ -610,7 +610,12 @@ const shotApi = {
   setCam(yaw, pitch) { camYaw = yaw; camPitch = pitch; },
   setCash(n) { GameState.cash = n; },
   setHealth(n) { GameState.health = n; },
-  beginDialogue() { interact(); },
+  beginDialogue() {
+    // staged scenes open Sol's conversation directly (the walk-up E press is for players)
+    const first = missions.beginTalk(GameState, missionCtx);
+    GameState.mode = 'dialogue';
+    Hud.showDialogue(first.speaker, first.text);
+  },
   beginStoryMission(index) {
     GameState.missionIndex = index;
     missions.beginTalk(GameState, missionCtx);
@@ -644,3 +649,21 @@ if (shotRequest) {
   if (shotRequest.shot !== 'title') Hud.showScreen(null);
 }
 animate();
+
+// A small handle for automated play-testing (and curious players in devtools): the live
+// state, the cast, and a teleport. It changes nothing about the game itself.
+window.__marisol = {
+  state: GameState,
+  player,
+  cars,
+  peds,
+  wanted: Wanted,
+  missions,
+  renderer,
+  teleport: (x, z, heading) => teleportPlayer(player, x, z, heading),
+  enterNearest: () => {
+    const car = nearestEnterableCar();
+    if (car) enterCar(car);
+    return !!car;
+  },
+};

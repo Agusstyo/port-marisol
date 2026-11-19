@@ -21,9 +21,10 @@ export function setupShotScene(request, api) {
   }
   api.startPlay();
   if (shot === 'fixer') {
-    // Rio at Sol's shoulder outside Ferreira Motors, the opening conversation open
-    api.teleportPlayer(34, -80.5, 2.62);
-    api.setCam(2.62, 0.24);
+    // Rio across the forecourt from Sol, Ferreira Motors behind him, the opening
+    // conversation open in the dialogue box
+    api.teleportPlayer(28, -75.5, 2.39);
+    api.setCam(2.39, 0.18);
     api.beginDialogue();
     return;
   }
@@ -31,7 +32,7 @@ export function setupShotScene(request, api) {
     // Mission one, second stage: Rio is driving Sol's sedan down the grand avenue toward
     // the marina with the delivery objective on the HUD, traffic all around
     const missionCar = api.beginStoryMission(0);
-    api.putPlayerInCar(missionCar, { x: -4, z: -34, heading: 0, speed: 13 });
+    api.putPlayerInCar(missionCar, { x: -4, z: -34, heading: 0, speed: 20 });
     api.setCash(1250);
     api.setCam(0, 0.3);
     return;
@@ -42,11 +43,13 @@ export function setupShotScene(request, api) {
     api.putPlayerInCar(missionCar, { x: 40, z: 76.5, heading: Math.PI / 2, speed: 21 });
     api.setCash(2340);
     api.setHealth(76);
-    api.wanted.setHeat(3.4, state.time);
-    api.spawnPoliceAt(40 - 17, 69, Math.PI / 2);
-    api.spawnPoliceAt(40 - 26, 84, Math.PI / 2);
-    api.spawnPoliceAt(40 + 30, 69, Math.PI / 2 + 0.4);
-    api.setCam(Math.PI / 2, 0.3);
+    api.wanted.setHeat(3.0, state.time);
+    api.spawnPoliceAt(40 - 13, 70, Math.PI / 2);
+    api.spawnPoliceAt(40 - 21, 83, Math.PI / 2);
+    api.spawnPoliceAt(40 + 16, 70, Math.PI / 2);
+    // the camera sits ahead of the car, looking back: Rio's hatchback head-on with the
+    // cruisers filling the road behind it
+    api.setCam(-Math.PI / 2, 0.32);
     return;
   }
   // unknown shot name: fall back to a plain free-roam start

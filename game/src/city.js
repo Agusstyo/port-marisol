@@ -231,7 +231,7 @@ export function buildCity(scene, seed) {
   }
   const trunkGeo = new THREE.CylinderGeometry(0.22, 0.34, 6.4, 6);
   const trunkMat = new THREE.MeshLambertMaterial({ color: 0x8a6b45 });
-  const frondGeo = new THREE.ConeGeometry(3.4, 1.6, 7);
+  const frondGeo = new THREE.ConeGeometry(2.7, 1.5, 7);
   const frondMat = new THREE.MeshLambertMaterial({ color: 0x3f9e4d });
   const trunks = new THREE.InstancedMesh(trunkGeo, trunkMat, palmSpots.length);
   const fronds = new THREE.InstancedMesh(frondGeo, frondMat, palmSpots.length);
